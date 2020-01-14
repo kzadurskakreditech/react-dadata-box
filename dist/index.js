@@ -285,7 +285,7 @@ var ReactDadata = function (_React$Component) {
         placeholder: placeholder,
         value: query
       };
-      console.log(query);
+
       return React.createElement(
         'div',
         { className: 'react-dadata react-dadata__container ' + className, style: styles },
@@ -473,7 +473,6 @@ var _initialiseProps = function _initialiseProps() {
         value = _suggestions$index.value,
         data = _suggestions$index.data;
 
-    console.log(suggestions);
 
     var displayedValue = _this2.state.type === 'fms_unit' ? data.code : value;
 
