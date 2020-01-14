@@ -1,18 +1,18 @@
 # React Dadata
-React компонент для подсказок с помощью сервиса DaData.ru
+React component for hints using DaData.ru service
 
-Поддерживаются подсказки адресов, организаций, банков.
+Supported hints: addresses, organizations, banks, email, fio, passport.
 
-### Установка
+### Installation
 ```
 npm install react-dadata-box
 ```
-или
+or
 ```
 yarn react-dadata-box
 ```
 
-### Пример
+### Usage
 ```javascript
 import ReactDadataBox from 'react-dadata-box';
 
@@ -21,25 +21,38 @@ import ReactDadataBox from 'react-dadata-box';
 <ReactDadataBox token="API_KEY" query="Москва" />
 ```
 
-### Свойства
+### Props
+To translate
 
-| Свойство  | Обязательный | Тип | Описание | По умолчанию |
+| Property  | Required | Type | Description | Default |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| allowClear | Нет | boolean | Показывать иконку для очищения текущего значения | false |
-| autocomplete | Нет | string | Параметр описывающий автозаполнение поля, например street-address, если не задан, будет установлен как off | "off" |
-| className | Нет | string | Дополнительный класс стилей | |
-| count | Нет | string | Кол-во возвращаемых записей | 10 |
-| customActions | Нет | ReactNode &#124; function [return: ReactNode] | Возможность добавления произвольных действия\[-ий\](элемента\[-ов\]) в конец базового выпадающего списка. Если устанавливается как функция, то принимает на вход полученный перечень вариантов(suggestions) в качестве аргумента. Каждый элемент (если в итоге предоставляется массив) - оборачивается в стандартный контейнер для отдельно взятого suggestion | |
-| customEndpoint | Нет | string &#124; object | Указать нестандартный URI для запроса подсказок (для использования в сценарии проксирования или при разворачивании сервиса локально в своей инфраструктуре); Если строка - рассматрривается как полный адрес хоста или относительный путь от корня текущего сайта (адрес api будет подставлен автоматически см. значение по умолчанию), если объект, то подразумевается наличие полей 'host' и/или 'api', опущенные значения будут подставленны из значения по умолчанию |{<br/>&nbsp;&nbsp;host: 'https://suggestions.dadata.ru',<br/>&nbsp;&nbsp;api: 'suggestions/api/4_1/rs/suggest'<br/>}|
-| customInput | Нет | function | Функция принимающая на вход props типового пол ввода, и позволяющая установить кастомный input-компонент или компонент с аналогичной сигнатурой | `(params) => <input { ...params } />`
-| debounce | Нет | number | Дебаунсинг обращения к сервису по изменениям строки поиска | 350 мс|
-| onChange | Нет | function | Функция, вызываемая при выборе подсказки | |
-| onIdleOut | Нет | function | Функция, вызываемая при изменении строки поиска, если по текущей подстроке не найдено вариантов подсказки, принимая текущую строку поиска как аргумент | |
-| payloadModifier | Нет | object &#124; function | Объект модифицирующий отправляемый payload ({...nativePayload, ...payloadModifier}}), или функция формирующая отправляемый payload, принимает аргументом объект payload формируемый компонентом для модификации. (Таким образом можно формировать и устанавливать дополнительные параметы н/п фильтрацию) | |
-| placeholder | Нет | string | Текст placeholder | |
-| query | Нет | string | Подстрока для запроса в DaData, значение для поля ввода, определяет набор доступных значений при раскрытии списка | |
-| showNote | Нет | boolean | Показывать подсказку по возможностям управления для пользователя в выпадающем списке | true |
-| silentQuery | Нет | string | Подстрока для запроса в DaData, которая применяется если свойство **query** не передано или является пустой строкой, оно не отображается в поле ввода, и в этом случае определяет список значений при раскрытии списка | |
-| token | Да | string | Авторизационный токен DaData.ru | |
-| type | Нет | string | Тип данных, которые необходимо запросить: адрес(address), организация(party) или банк(bank), почта(email), фио(fio), паспорт-подразделение(fms_unit) | "address" |
+| allowClear | Not | boolean | Show icon to clear current value | false |
+| autocomplete | Not | string | The parameter describing the autocomplete of the field, for example street-address, if not set, will be set to off | "off" |
+| className | Not | string | Дополнительный класс стилей | |
+| count | Not | string | Number of records returned from dadata | 10 |
+| customActions | Not | ReactNode &#124; function [return: ReactNode] | Возможность добавления произвольных действия\[-ий\](элемента\[-ов\]) в конец базового выпадающего списка. Если устанавливается как функция, то принимает на вход полученный перечень вариантов(suggestions) в качестве аргумента. Каждый элемент (если в итоге предоставляется массив) - оборачивается в стандартный контейнер для отдельно взятого suggestion | |
+| customEndpoint | Not | string &#124; object | Указать нестандартный URI для запроса подсказок (для использования в сценарии проксирования или при разворачивании сервиса локально в своей инфраструктуре); Если строка - рассматрривается как полный адрес хоста или относительный путь от корня текущего сайта (адрес api будет подставлен автоматически см. значение по умолчанию), если объект, то подразумевается наличие полей 'host' и/или 'api', опущенные значения будут подставленны из значения по умолчанию |{<br/>&nbsp;&nbsp;host: 'https://suggestions.dadata.ru',<br/>&nbsp;&nbsp;api: 'suggestions/api/4_1/rs/suggest'<br/>}|
+| customInput | Not | function | Функция принимающая на вход props типового пол ввода, и позволяющая установить кастомный input-компонент или компонент с аналогичной сигнатурой | `(params) => <input { ...params } />`
+| debounce | Not | number | Time of debouncing a service call for search bar changes | 350 мс|
+| onChange | Not | function | Function called when selecting an option from list | |
+| onIdleOut | Not | function | Функция, вызываемая при изменении строки поиска, если по текущей подстроке не найдено вариантов подсказки, принимая текущую строку поиска как аргумент | |
+| payloadModifier | Not | object &#124; function | Объект модифицирующий отправляемый payload ({...nativePayload, ...payloadModifier}}), или функция формирующая отправляемый payload, принимает аргументом объект payload формируемый компонентом для модификации. (Таким образом можно формировать и устанавливать дополнительные параметы н/п фильтрацию) | |
+| placeholder | Not | string | Text placeholder | |
+| query | Not | string | The substring for the query in DaData, the value for the input field, defines the set of available values ​​when expanding the list | |
+| showNote | Not | boolean | Show tooltip for user options in dropdown list | true |
+| silentQuery | Not | string | Подстрока для запроса в DaData, которая применяется если свойство **query** не передано или является пустой строкой, оно не отображается в поле ввода, и в этом случае определяет список значений при раскрытии списка | |
+| token | Yes | string | Authorization Token DaData.ru | |
+| type | Not | string | Type of data to be requested: address (address), organization (party) or bank (bank), mail (email), name (fio), passport (fms_unit) | "address" |
+
+### Development
+
+Clone the repository
+
+`npm i`
+
+`npm start`
+
+#### Build
+??
+`npm transpile`
 
