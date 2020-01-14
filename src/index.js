@@ -317,7 +317,6 @@ class ReactDadata extends React.Component {
   selectSuggestion = (index, showSuggestions = false) => {
     const { suggestions } = this.state;
     const { value, data } = suggestions[index];
-    console.log(suggestions);
 
     const displayedValue = this.state.type === 'fms_unit' ? data.code : value;
 
@@ -361,7 +360,7 @@ class ReactDadata extends React.Component {
       placeholder: placeholder,
       value: query
     };
-    console.log(query);
+
     return (
       <div className={`react-dadata react-dadata__container ${className}`} style={styles}>
         {customInput(inputConfig)}
