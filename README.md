@@ -5,7 +5,7 @@ Supported hints: addresses, organizations, banks, email, fio, passport.
 
 ### Installation
 ```
-npm install --save kzadurskakreditech/react-dadata-box#LOAP-2969-display-code
+npm install --save kzadurskakreditech/react-dadata-box#master
 ```
 
 
