@@ -5,12 +5,9 @@ Supported hints: addresses, organizations, banks, email, fio, passport.
 
 ### Installation
 ```
-npm install react-dadata-box
+npm install --save kzadurskakreditech/react-dadata-box#LOAP-2969-display-code
 ```
-or
-```
-yarn react-dadata-box
-```
+
 
 ### Usage
 ```javascript
@@ -54,5 +51,5 @@ Clone the repository
 
 #### Build
 ??
-`npm transpile`
+`npm run transpile`
 
