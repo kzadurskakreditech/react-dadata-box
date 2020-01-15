@@ -469,11 +469,15 @@ var _initialiseProps = function _initialiseProps() {
   this.selectSuggestion = function (index) {
     var showSuggestions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     var suggestions = _this2.state.suggestions;
-    var value = suggestions[index].value;
+    var _suggestions$index = suggestions[index],
+        value = _suggestions$index.value,
+        data = _suggestions$index.data;
 
+
+    var displayedValue = _this2.state.type === 'fms_unit' ? data.code : value;
 
     _this2.setState({
-      query: value,
+      query: displayedValue,
       showSuggestions: showSuggestions
     });
 

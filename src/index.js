@@ -316,10 +316,12 @@ class ReactDadata extends React.Component {
 
   selectSuggestion = (index, showSuggestions = false) => {
     const { suggestions } = this.state;
-    const { value } = suggestions[index];
+    const { value, data } = suggestions[index];
+
+    const displayedValue = this.state.type === 'fms_unit' ? data.code : value;
 
     this.setState({
-      query: value,
+      query: displayedValue,
       showSuggestions: showSuggestions
     });
 
