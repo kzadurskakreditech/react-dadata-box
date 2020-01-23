@@ -340,6 +340,7 @@ class ReactDadata extends React.Component {
     const {
       allowClear,
       autocomplete,
+      autoFocus,
       className,
       customActions,
       customInput,
@@ -358,7 +359,8 @@ class ReactDadata extends React.Component {
       onFocus: this.onInputFocus,
       onKeyDown: this.onKeyPress,
       placeholder: placeholder,
-      value: query
+      value: query,
+      autoFocus: autoFocus || false,
     };
 
     return (
@@ -391,6 +393,7 @@ class ReactDadata extends React.Component {
 ReactDadata.propTypes = {
   allowClear: PropTypes.bool,
   autocomplete: PropTypes.bool,
+  autoFocus: PropTypes.bool,
   city: PropTypes.bool,
   className: PropTypes.string,
   count: PropTypes.number,

@@ -265,6 +265,7 @@ var ReactDadata = function (_React$Component) {
       var _props = this.props,
           allowClear = _props.allowClear,
           autocomplete = _props.autocomplete,
+          autoFocus = _props.autoFocus,
           className = _props.className,
           customActions = _props.customActions,
           customInput = _props.customInput,
@@ -283,7 +284,8 @@ var ReactDadata = function (_React$Component) {
         onFocus: this.onInputFocus,
         onKeyDown: this.onKeyPress,
         placeholder: placeholder,
-        value: query
+        value: query,
+        autoFocus: autoFocus || false
       };
 
       return React.createElement(
@@ -495,6 +497,7 @@ var _initialiseProps = function _initialiseProps() {
 ReactDadata.propTypes = {
   allowClear: _propTypes2.default.bool,
   autocomplete: _propTypes2.default.bool,
+  autoFocus: _propTypes2.default.bool,
   city: _propTypes2.default.bool,
   className: _propTypes2.default.string,
   count: _propTypes2.default.number,
