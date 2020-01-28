@@ -429,7 +429,6 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.fetchSuggestions = function (setStateAdditional) {
-    console.log('fetching suggestions');
     _this2.xhr.abort();
 
     var type = _this2.state.type;

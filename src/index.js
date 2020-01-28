@@ -273,7 +273,6 @@ class ReactDadata extends React.Component {
   };
 
   fetchSuggestions = setStateAdditional => {
-    console.log('fetching suggestions');
     this.xhr.abort();
 
     const { type } = this.state;
