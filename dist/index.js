@@ -359,9 +359,7 @@ var _initialiseProps = function _initialiseProps() {
         args[_key2] = arguments[_key2];
       }
 
-      if (_this2.debounceTimer) {
-        clearTimeout(_this2.debounceTimer);
-      }
+      clearTimeout(_this2.debounceTimer);
       _this2.debounceTimer = setTimeout(function () {
         func.apply(undefined, args);
       }, cooldown);
@@ -372,11 +370,18 @@ var _initialiseProps = function _initialiseProps() {
     var value = event.target.value;
 
 
+    if (value.length === 0) {
+      return _this2.clear();
+    }
+
+    if (value.length < 3) {
+      clearTimeout(_this2.debounceTimer);
+      return _this2.setState({ query: value, showSuggestions: false });
+    }
+
     _this2.setState({ query: value, showSuggestions: true }, function () {
       _this2.debounce(_this2.fetchSuggestions, _this2.props.debounce)({ inputFocused: true, showSuggestions: true });
     });
-
-    !value && _this2.clear();
   };
 
   this.onKeyPress = function (event) {
@@ -407,6 +412,7 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.fetchSuggestions = function (setStateAdditional) {
+    console.log('fetching suggestions');
     _this2.xhr.abort();
 
     var type = _this2.state.type;

@@ -51,6 +51,6 @@ Clone the repository
 
 #### Build
 
-`npm run transpile`
+`npm run build`
 and commit the `dist` directory to origin.
 
