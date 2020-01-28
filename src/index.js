@@ -346,7 +346,8 @@ class ReactDadata extends React.Component {
       customInput,
       placeholder,
       showNote,
-      styles
+      styles,
+      name
     } = this.props;
 
     const showSuggestionsList = inputFocused && showSuggestions;
@@ -361,6 +362,7 @@ class ReactDadata extends React.Component {
       placeholder: placeholder,
       value: query,
       autoFocus: autoFocus || false,
+      name: name || 'daData'
     };
 
     return (
@@ -410,7 +412,8 @@ ReactDadata.propTypes = {
   silentQuery: PropTypes.string,
   style: PropTypes.objectOf(PropTypes.string),
   token: PropTypes.string.isRequired,
-  type: PropTypes.string
+  type: PropTypes.string,
+  name: PropTypes.string,
 };
 
 ReactDadata.defaultProps = {
