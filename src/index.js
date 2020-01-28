@@ -187,8 +187,8 @@ class ReactDadata extends React.Component {
   };
 
   componentDidUpdate = prevProps => {
-    if (this.props.query !== prevProps.query) {
-      this.setState({ query: this.props.query }, this.fetchSuggestions);
+    if (this.props.query !== prevProps.query && this.props.query !== this.state.query) {
+      this.setState({ query: this.props.query }, this.onPropsQueryUpdate);
     }
   };
 
@@ -232,6 +232,22 @@ class ReactDadata extends React.Component {
     }
 
     this.setState({ query: value, showSuggestions: true }, () => {
+      this.debounce(this.fetchSuggestions, this.props.debounce)({ inputFocused: true, showSuggestions: true });
+    });
+  };
+
+  onPropsQueryUpdate = () => {
+    const { query } = this.state;
+    if (query.length === 0) {
+      return this.clear();
+    }
+
+    if (query.length < 3) {
+      clearTimeout(this.debounceTimer);
+      return this.setState({ showSuggestions: false });
+    }
+
+    this.setState({ showSuggestions: true }, () => {
       this.debounce(this.fetchSuggestions, this.props.debounce)({ inputFocused: true, showSuggestions: true });
     });
   };

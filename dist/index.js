@@ -334,8 +334,8 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.componentDidUpdate = function (prevProps) {
-    if (_this2.props.query !== prevProps.query) {
-      _this2.setState({ query: _this2.props.query }, _this2.fetchSuggestions);
+    if (_this2.props.query !== prevProps.query && _this2.props.query !== _this2.state.query) {
+      _this2.setState({ query: _this2.props.query }, _this2.onPropsQueryUpdate);
     }
   };
 
@@ -380,6 +380,23 @@ var _initialiseProps = function _initialiseProps() {
     }
 
     _this2.setState({ query: value, showSuggestions: true }, function () {
+      _this2.debounce(_this2.fetchSuggestions, _this2.props.debounce)({ inputFocused: true, showSuggestions: true });
+    });
+  };
+
+  this.onPropsQueryUpdate = function () {
+    var query = _this2.state.query;
+
+    if (query.length === 0) {
+      return _this2.clear();
+    }
+
+    if (query.length < 3) {
+      clearTimeout(_this2.debounceTimer);
+      return _this2.setState({ showSuggestions: false });
+    }
+
+    _this2.setState({ showSuggestions: true }, function () {
       _this2.debounce(_this2.fetchSuggestions, _this2.props.debounce)({ inputFocused: true, showSuggestions: true });
     });
   };
