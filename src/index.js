@@ -212,9 +212,7 @@ class ReactDadata extends React.Component {
 
   debounce = (func, cooldown = 350) => {
     return (...args) => {
-      if (this.debounceTimer) {
-        clearTimeout(this.debounceTimer);
-      }
+      clearTimeout(this.debounceTimer);
       this.debounceTimer = setTimeout(() => {
         func(...args);
       }, cooldown);
@@ -224,11 +222,18 @@ class ReactDadata extends React.Component {
   onInputChange = event => {
     const { value } = event.target;
 
+    if (value.length === 0) {
+      return this.clear();
+    }
+
+    if (value.length < 3) {
+      clearTimeout(this.debounceTimer);
+      return this.setState({ query: value, showSuggestions: false });
+    }
+
     this.setState({ query: value, showSuggestions: true }, () => {
       this.debounce(this.fetchSuggestions, this.props.debounce)({ inputFocused: true, showSuggestions: true });
     });
-
-    !value && this.clear();
   };
 
   onKeyPress = event => {
@@ -252,6 +257,7 @@ class ReactDadata extends React.Component {
   };
 
   fetchSuggestions = setStateAdditional => {
+    console.log('fetching suggestions');
     this.xhr.abort();
 
     const { type } = this.state;
@@ -360,7 +366,7 @@ class ReactDadata extends React.Component {
       onKeyDown: this.onKeyPress,
       placeholder: placeholder,
       value: query,
-      autoFocus: autoFocus || false,
+      autoFocus: autoFocus || false
     };
 
     return (

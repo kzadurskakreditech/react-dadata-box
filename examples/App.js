@@ -23,7 +23,6 @@ class App extends Component {
   };
 
   render() {
-    console.log('state', this.state.selectedValues);
     return (
       <div>
         {/* <input placeholder="адрес" value={this.state.value} onChange={this.handleType} />
