@@ -370,7 +370,8 @@ class ReactDadata extends React.Component {
       customInput,
       placeholder,
       showNote,
-      styles
+      styles,
+      name
     } = this.props;
 
     const showSuggestionsList = inputFocused && showSuggestions;
@@ -384,7 +385,8 @@ class ReactDadata extends React.Component {
       onKeyDown: this.onKeyPress,
       placeholder: placeholder,
       value: query,
-      autoFocus: autoFocus || false
+      autoFocus: autoFocus || false,
+      name: name || 'daData'
     };
 
     return (
@@ -436,6 +438,7 @@ ReactDadata.propTypes = {
   token: PropTypes.string.isRequired,
   type: PropTypes.string,
   minimumCharacterThreshold: PropTypes.number,
+  name: PropTypes.string
 };
 
 ReactDadata.defaultProps = {

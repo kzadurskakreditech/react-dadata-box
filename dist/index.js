@@ -271,7 +271,8 @@ var ReactDadata = function (_React$Component) {
           customInput = _props.customInput,
           placeholder = _props.placeholder,
           showNote = _props.showNote,
-          styles = _props.styles;
+          styles = _props.styles,
+          name = _props.name;
 
 
       var showSuggestionsList = inputFocused && showSuggestions;
@@ -285,7 +286,8 @@ var ReactDadata = function (_React$Component) {
         onKeyDown: this.onKeyPress,
         placeholder: placeholder,
         value: query,
-        autoFocus: autoFocus || false
+        autoFocus: autoFocus || false,
+        name: name || 'daData'
       };
 
       return React.createElement(
@@ -540,7 +542,8 @@ ReactDadata.propTypes = {
   style: _propTypes2.default.objectOf(_propTypes2.default.string),
   token: _propTypes2.default.string.isRequired,
   type: _propTypes2.default.string,
-  minimumCharacterThreshold: _propTypes2.default.number
+  minimumCharacterThreshold: _propTypes2.default.number,
+  name: _propTypes2.default.string
 };
 
 ReactDadata.defaultProps = {
