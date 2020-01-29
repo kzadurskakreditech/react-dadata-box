@@ -81,6 +81,15 @@ class App extends Component {
         <ReactDadataBox
           className="data"
           token={token}
+          placeholder="Address with request after 10 characters"
+          type="address"
+          city={true}
+          onChange={this.handleSelectedValue('address')}
+          minimumCharacterThreshold={10}
+        />
+        <ReactDadataBox
+          className="data"
+          token={token}
           placeholder="Passport"
           type="fms_unit"
           city={true}

@@ -144,7 +144,7 @@ interface BaseInputProps<T = HTMLInputElement> {
  * @property  { onChange } onChange - [optional] - onChange handler
  * @property  { onIdleOut } onIdleOut - [optional] - onIdleOut handler, fires with one argument - current query, when by this query has not returned suggestions
  * @property  { object | function } payloadModifier - [optional] - object to patch payload or function returned payload object to send, that has auto generated payload object as argument
- * @property  { debounce } onChange - [optional] - debounce to onChange handler (default: 350 ms).
+ * @property  { debounce } onChange - [optional] - debounce to onChange handler (default: 350 ms)
  * @property  { string } placeholder - [optional] - placeholder
  * @property  { string } query - [optional] - query for search
  * @property  { React.CSSProperties } style - [optional] - custom styling
@@ -153,6 +153,7 @@ interface BaseInputProps<T = HTMLInputElement> {
  * @property  { boolean } allowClear - [optional] show/hide clear fieldd control
  * @property  { boolean } showNote - [optional] show/hide note at suggestions list
  * @property  { boolean } silentQuery - [optional] initial query that not showed on input but determine  suggestion list that showed at first
+ * @property  { number } minimumCharacterThreshold - [optional] minimum number of characters entered after which a first request is sent (default: 3)
  */
 
 interface Props {
@@ -180,6 +181,7 @@ interface Props {
   allowClear?: boolean;
   showNote?: boolean;
   silentQuery?: string;
+  minimumCharacterThreshold?: number;
 }
 
 /**

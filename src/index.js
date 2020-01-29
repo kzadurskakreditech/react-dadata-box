@@ -221,12 +221,13 @@ class ReactDadata extends React.Component {
 
   onInputChange = event => {
     const { value } = event.target;
+    const { minimumCharacterThreshold } = this.props;
 
     if (value.length === 0) {
       return this.clear();
     }
 
-    if (value.length < 3) {
+    if (value.length < minimumCharacterThreshold) {
       clearTimeout(this.debounceTimer);
       return this.setState({ query: value, showSuggestions: false });
     }
@@ -238,11 +239,13 @@ class ReactDadata extends React.Component {
 
   onPropsQueryUpdate = () => {
     const { query } = this.state;
+    const { minimumCharacterThreshold } = this.props;
+
     if (query.length === 0) {
       return this.clear();
     }
 
-    if (query.length < 3) {
+    if (query.length < minimumCharacterThreshold) {
       clearTimeout(this.debounceTimer);
       return this.setState({ showSuggestions: false });
     }
@@ -431,11 +434,13 @@ ReactDadata.propTypes = {
   silentQuery: PropTypes.string,
   style: PropTypes.objectOf(PropTypes.string),
   token: PropTypes.string.isRequired,
-  type: PropTypes.string
+  type: PropTypes.string,
+  minimumCharacterThreshold: PropTypes.number,
 };
 
 ReactDadata.defaultProps = {
-  customInput: params => <input {...params} />
+  customInput: params => <input {...params} />,
+  minimumCharacterThreshold: 3
 };
 
 export default ReactDadata;

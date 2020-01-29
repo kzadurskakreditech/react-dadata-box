@@ -368,13 +368,14 @@ var _initialiseProps = function _initialiseProps() {
 
   this.onInputChange = function (event) {
     var value = event.target.value;
+    var minimumCharacterThreshold = _this2.props.minimumCharacterThreshold;
 
 
     if (value.length === 0) {
       return _this2.clear();
     }
 
-    if (value.length < 3) {
+    if (value.length < minimumCharacterThreshold) {
       clearTimeout(_this2.debounceTimer);
       return _this2.setState({ query: value, showSuggestions: false });
     }
@@ -386,12 +387,14 @@ var _initialiseProps = function _initialiseProps() {
 
   this.onPropsQueryUpdate = function () {
     var query = _this2.state.query;
+    var minimumCharacterThreshold = _this2.props.minimumCharacterThreshold;
+
 
     if (query.length === 0) {
       return _this2.clear();
     }
 
-    if (query.length < 3) {
+    if (query.length < minimumCharacterThreshold) {
       clearTimeout(_this2.debounceTimer);
       return _this2.setState({ showSuggestions: false });
     }
@@ -536,13 +539,15 @@ ReactDadata.propTypes = {
   silentQuery: _propTypes2.default.string,
   style: _propTypes2.default.objectOf(_propTypes2.default.string),
   token: _propTypes2.default.string.isRequired,
-  type: _propTypes2.default.string
+  type: _propTypes2.default.string,
+  minimumCharacterThreshold: _propTypes2.default.number
 };
 
 ReactDadata.defaultProps = {
   customInput: function customInput(params) {
     return React.createElement('input', params);
-  }
+  },
+  minimumCharacterThreshold: 3
 };
 
 exports.default = ReactDadata;
