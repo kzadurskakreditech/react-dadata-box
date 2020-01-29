@@ -40,7 +40,8 @@ To translate
 | silentQuery | Not | string | Подстрока для запроса в DaData, которая применяется если свойство **query** не передано или является пустой строкой, оно не отображается в поле ввода, и в этом случае определяет список значений при раскрытии списка | |
 | token | Yes | string | Authorization Token DaData.ru | |
 | type | Not | string | Type of data to be requested: address (address), organization (party) or bank (bank), mail (email), name (fio), passport (fms_unit) | "address" |
-| minimumCharacterThreshold | Not | number | minimum number of characters entered after which a first request is sent | 3 |
+| name | Not | string | Property name of input | daData |
+| minimumCharacterThreshold | Not | number | Minimum number of characters entered after which a first request is sent | 3 |
 
 ### Development
 

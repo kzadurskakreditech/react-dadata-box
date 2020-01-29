@@ -153,6 +153,7 @@ interface BaseInputProps<T = HTMLInputElement> {
  * @property  { boolean } allowClear - [optional] show/hide clear fieldd control
  * @property  { boolean } showNote - [optional] show/hide note at suggestions list
  * @property  { boolean } silentQuery - [optional] initial query that not showed on input but determine  suggestion list that showed at first
+ * @property  { string } name - [optional] - property name of input (default: "daData")
  * @property  { number } minimumCharacterThreshold - [optional] minimum number of characters entered after which a first request is sent (default: 3)
  */
 
@@ -181,6 +182,7 @@ interface Props {
   allowClear?: boolean;
   showNote?: boolean;
   silentQuery?: string;
+  name?: string;
   minimumCharacterThreshold?: number;
 }
 

@@ -542,8 +542,8 @@ ReactDadata.propTypes = {
   style: _propTypes2.default.objectOf(_propTypes2.default.string),
   token: _propTypes2.default.string.isRequired,
   type: _propTypes2.default.string,
-  minimumCharacterThreshold: _propTypes2.default.number,
-  name: _propTypes2.default.string
+  name: _propTypes2.default.string,
+  minimumCharacterThreshold: _propTypes2.default.number
 };
 
 ReactDadata.defaultProps = {
