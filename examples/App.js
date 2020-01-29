@@ -23,19 +23,25 @@ class App extends Component {
   };
 
   render() {
-    console.log('state', this.state.selectedValues);
     return (
       <div>
-        {/* <input placeholder="адрес" value={this.state.value} onChange={this.handleType} />
-        <ReactDadataBox
-          className="data"
-          token={token}
-          placeholder="Адрес"
-          type="address"
-          query={this.state.value}
-          onChange={this.handleChange}
-          allowClear
-        /> */}
+        <div style={{ background: 'aliceblue', padding: '10px 5px' }}>
+          <input
+            placeholder="Enter to simulate props to dadata input"
+            value={this.state.value}
+            onChange={this.handleType}
+            style={{ width: '100%', boxSizing: 'border-box' }}
+          />
+          <ReactDadataBox
+            className="data"
+            token={token}
+            placeholder="Аddress"
+            type="address"
+            query={this.state.value}
+            onChange={this.handleChange}
+            allowClear
+          />
+        </div>
         <ReactDadataBox
           className="data"
           token={token}
@@ -71,6 +77,15 @@ class App extends Component {
           type="address"
           city={true}
           onChange={this.handleSelectedValue('address')}
+        />
+        <ReactDadataBox
+          className="data"
+          token={token}
+          placeholder="Address with request after 10 characters"
+          type="address"
+          city={true}
+          onChange={this.handleSelectedValue('address')}
+          minimumCharacterThreshold={10}
         />
         <ReactDadataBox
           className="data"

@@ -336,8 +336,8 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.componentDidUpdate = function (prevProps) {
-    if (_this2.props.query !== prevProps.query) {
-      _this2.setState({ query: _this2.props.query }, _this2.fetchSuggestions);
+    if (_this2.props.query !== prevProps.query && _this2.props.query !== _this2.state.query) {
+      _this2.setState({ query: _this2.props.query }, _this2.onPropsQueryUpdate);
     }
   };
 
@@ -361,9 +361,7 @@ var _initialiseProps = function _initialiseProps() {
         args[_key2] = arguments[_key2];
       }
 
-      if (_this2.debounceTimer) {
-        clearTimeout(_this2.debounceTimer);
-      }
+      clearTimeout(_this2.debounceTimer);
       _this2.debounceTimer = setTimeout(function () {
         func.apply(undefined, args);
       }, cooldown);
@@ -372,13 +370,40 @@ var _initialiseProps = function _initialiseProps() {
 
   this.onInputChange = function (event) {
     var value = event.target.value;
+    var minimumCharacterThreshold = _this2.props.minimumCharacterThreshold;
 
+
+    if (value.length === 0) {
+      return _this2.clear();
+    }
+
+    if (value.length < minimumCharacterThreshold) {
+      clearTimeout(_this2.debounceTimer);
+      return _this2.setState({ query: value, showSuggestions: false });
+    }
 
     _this2.setState({ query: value, showSuggestions: true }, function () {
       _this2.debounce(_this2.fetchSuggestions, _this2.props.debounce)({ inputFocused: true, showSuggestions: true });
     });
+  };
 
-    !value && _this2.clear();
+  this.onPropsQueryUpdate = function () {
+    var query = _this2.state.query;
+    var minimumCharacterThreshold = _this2.props.minimumCharacterThreshold;
+
+
+    if (query.length === 0) {
+      return _this2.clear();
+    }
+
+    if (query.length < minimumCharacterThreshold) {
+      clearTimeout(_this2.debounceTimer);
+      return _this2.setState({ showSuggestions: false });
+    }
+
+    _this2.setState({ showSuggestions: true }, function () {
+      _this2.debounce(_this2.fetchSuggestions, _this2.props.debounce)({ inputFocused: true, showSuggestions: true });
+    });
   };
 
   this.onKeyPress = function (event) {
@@ -517,13 +542,15 @@ ReactDadata.propTypes = {
   style: _propTypes2.default.objectOf(_propTypes2.default.string),
   token: _propTypes2.default.string.isRequired,
   type: _propTypes2.default.string,
-  name: _propTypes2.default.string
+  name: _propTypes2.default.string,
+  minimumCharacterThreshold: _propTypes2.default.number
 };
 
 ReactDadata.defaultProps = {
   customInput: function customInput(params) {
     return React.createElement('input', params);
-  }
+  },
+  minimumCharacterThreshold: 3
 };
 
 exports.default = ReactDadata;

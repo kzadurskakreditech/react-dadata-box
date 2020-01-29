@@ -187,8 +187,8 @@ class ReactDadata extends React.Component {
   };
 
   componentDidUpdate = prevProps => {
-    if (this.props.query !== prevProps.query) {
-      this.setState({ query: this.props.query }, this.fetchSuggestions);
+    if (this.props.query !== prevProps.query && this.props.query !== this.state.query) {
+      this.setState({ query: this.props.query }, this.onPropsQueryUpdate);
     }
   };
 
@@ -212,9 +212,7 @@ class ReactDadata extends React.Component {
 
   debounce = (func, cooldown = 350) => {
     return (...args) => {
-      if (this.debounceTimer) {
-        clearTimeout(this.debounceTimer);
-      }
+      clearTimeout(this.debounceTimer);
       this.debounceTimer = setTimeout(() => {
         func(...args);
       }, cooldown);
@@ -223,12 +221,38 @@ class ReactDadata extends React.Component {
 
   onInputChange = event => {
     const { value } = event.target;
+    const { minimumCharacterThreshold } = this.props;
+
+    if (value.length === 0) {
+      return this.clear();
+    }
+
+    if (value.length < minimumCharacterThreshold) {
+      clearTimeout(this.debounceTimer);
+      return this.setState({ query: value, showSuggestions: false });
+    }
 
     this.setState({ query: value, showSuggestions: true }, () => {
       this.debounce(this.fetchSuggestions, this.props.debounce)({ inputFocused: true, showSuggestions: true });
     });
+  };
 
-    !value && this.clear();
+  onPropsQueryUpdate = () => {
+    const { query } = this.state;
+    const { minimumCharacterThreshold } = this.props;
+
+    if (query.length === 0) {
+      return this.clear();
+    }
+
+    if (query.length < minimumCharacterThreshold) {
+      clearTimeout(this.debounceTimer);
+      return this.setState({ showSuggestions: false });
+    }
+
+    this.setState({ showSuggestions: true }, () => {
+      this.debounce(this.fetchSuggestions, this.props.debounce)({ inputFocused: true, showSuggestions: true });
+    });
   };
 
   onKeyPress = event => {
@@ -414,10 +438,12 @@ ReactDadata.propTypes = {
   token: PropTypes.string.isRequired,
   type: PropTypes.string,
   name: PropTypes.string,
+  minimumCharacterThreshold: PropTypes.number
 };
 
 ReactDadata.defaultProps = {
-  customInput: params => <input {...params} />
+  customInput: params => <input {...params} />,
+  minimumCharacterThreshold: 3
 };
 
 export default ReactDadata;

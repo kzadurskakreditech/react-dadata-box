@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "webpack-dev-server",
-    "transpile": "NODE_ENV=production babel src -d dist --copy-files",
-    "prepublishOnly": "npm run transpile"
+    "build": "NODE_ENV=production babel src -d dist --copy-files",
+    "prepublishOnly": "npm run build"
   },
   "author": {
     "name": "orbita",
